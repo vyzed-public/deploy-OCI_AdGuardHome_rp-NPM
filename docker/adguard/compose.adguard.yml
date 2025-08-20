@@ -5,7 +5,7 @@ services:
     image: adguard/adguardhome:latest
     networks:
       vyzed-proxy_frontend:
-        ipv4_address: 172.20.0.50    
+        ipv4_address: 172.10.0.10    
     ports: # Starting from port specs on the AdGuard Docker Spec Page: 
            # But NB that Portainer stand-ups will conflict w/ standard DNS services on port 53
            # So we will START on port 54, and adjust after localhost DNS reconfiguration.
