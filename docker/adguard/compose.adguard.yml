@@ -18,8 +18,8 @@ services:
       # add if you are going to use AdGuard Home's admin panel 
       # ...as well as run AdGuard Home as an HTTPS/DNS-over-HTTPS server
       - 8080:80/tcp  # We use 80 for NPM's Acme companion traffic
-      - 445:443/udp  # We run NPM on 443, and Nextcloud on 444
-      - 445:443/tcp  # We run NPM on 443, and Nextcloud on 444
+      - 445:443/udp  # We run NPM on 443, and may run Nextcloud on 444
+      - 445:443/tcp  # We run NPM on 443, and may run Nextcloud on 444
       - 3000:3000/tcp
       # add if you are going to run AdGuard Home as a DNS-over-TLS server.
       # - "853:853/tcp"
