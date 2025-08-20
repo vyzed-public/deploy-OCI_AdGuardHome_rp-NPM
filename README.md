@@ -3,7 +3,7 @@ Explore practical deployments of simple AdGuard Home instance(s) onto the free s
 
 ### Background:
 
-This service deployent relies on the previous project: [deploy-OCI_Portainer-NPM-frontend](https://github.com/vyzed-public/deploy-OCI_Portainer-NPM-frontend/tree/main)
+This service deployment relies on the previous project: [deploy-OCI_Portainer-NPM-frontend](https://github.com/vyzed-public/deploy-OCI_Portainer-NPM-frontend/tree/main)
 * Explore practical deployment of a Portainer web GUI instance onto the free service tier of Oracle Cloud Infrastructure that implements a reverse proxy for front-end network services using Nginx Proxy Manager.
 
 ### Objective:
