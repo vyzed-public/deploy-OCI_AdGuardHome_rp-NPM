@@ -1,0 +1,42 @@
+# Deploy as a Portainer stack: vyzed-dns
+services:
+  adguard-dns:
+    container_name: adguard-dns
+    image: adguard/adguardhome:latest
+    networks:
+      vyzed-proxy_frontend:
+        ipv4_address: 172.20.0.50    
+    ports: # Starting from port specs on the AdGuard Docker Spec Page: 
+           # But NB that Portainer stand-ups will conflict w/ standard DNS services on port 53
+           # So we will START on port 54, and adjust after localhost DNS reconfiguration.
+      # The AdGuard DNS server
+      - 54:53/tcp # Normally: 53:53/tcp
+      - 54:53/tcp # Normally: 53:53/udp
+      # Use AdGuard Home as a DHCP server.
+      #- "67:67/udp"
+      #- "68:68/udp"
+      # add if you are going to use AdGuard Home's admin panel 
+      # ...as well as run AdGuard Home as an HTTPS/DNS-over-HTTPS server
+      - 8080:80/tcp
+      - 445:443/udp
+      - 445:443/tcp
+      - 3000:3000/tcp
+      # add if you are going to run AdGuard Home as a DNS-over-TLS server.
+      # - "853:853/tcp"
+      # add if you are going to run AdGuard Home as a DNS-over-QUIC server.
+      # - "784:784/udp"
+      # - "853:853/udp"
+      # - "8853:8853/udp"
+      # add if you are going to run AdGuard Home as a DNSCrypt⁠ server.
+      # - "5443:5443/tcp"
+      # - "5443:5443/udp"
+    # Volumes store your data between container upgrades
+    # Points to two local subfolders 'configuration' and 'data' alongside 'docker-compose.yml' file.
+    volumes:
+      - './configuration:/opt/adguardhome/work'
+      - './data:/opt/adguardhome/conf'
+    restart: unless-stopped
+    
+networks:
+  vyzed-proxy_frontend:
+    external: true
