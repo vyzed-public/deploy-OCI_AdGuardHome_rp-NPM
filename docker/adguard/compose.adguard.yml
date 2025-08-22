@@ -11,7 +11,7 @@ services:
            # So we will START on port 54, and adjust after localhost DNS reconfiguration.
       # The AdGuard DNS server
       - 54:53/tcp # Normally: 53:53/tcp
-      - 54:53/tcp # Normally: 53:53/udp
+      - 54:53/udp # Normally: 53:53/udp
       # Use AdGuard Home as a DHCP server.
       #- "67:67/udp"
       #- "68:68/udp"
