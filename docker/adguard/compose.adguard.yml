@@ -10,8 +10,8 @@ services:
            # But NB that Portainer stand-ups will conflict w/ standard DNS services on port 53
            # So we will START on port 54, and adjust after localhost DNS reconfiguration.
       # The AdGuard DNS server
-      - 54:53/tcp # Normally: 53:53/tcp
-      - 54:53/udp # Normally: 53:53/udp
+      - 53:53/tcp # Normally: 53:53/tcp
+      - 53:53/udp # Normally: 53:53/udp
       # Use AdGuard Home as a DHCP server.
       #- "67:67/udp"
       #- "68:68/udp"
@@ -20,7 +20,7 @@ services:
       - 8080:80/tcp  # We use 80 for NPM's Acme companion traffic
       - 445:443/udp  # We run NPM on 443, and may run Nextcloud on 444
       - 445:443/tcp  # We run NPM on 443, and may run Nextcloud on 444
-      - 3000:3000/tcp
+      # - 3000:3000/tcp # After initialization, we don't need this.
       # add if you are going to run AdGuard Home as a DNS-over-TLS server.
       # - "853:853/tcp"
       # add if you are going to run AdGuard Home as a DNS-over-QUIC server.
@@ -32,9 +32,12 @@ services:
       # - "5443:5443/udp"
     # Volumes store your data between container upgrades
     # Points to two local subfolders 'configuration' and 'data' alongside 'docker-compose.yml' file.
+    environment:
+      ALLOW_UNENCRYPTED_DOH:  'false'
+      TRUSTED_PROXIES:        'nginx-proxy-manager'
     volumes:
-      - './configuration:/opt/adguardhome/work'
-      - './data:/opt/adguardhome/conf'
+      - './configuration_1:/opt/adguardhome/work'
+      - './data_1:/opt/adguardhome/conf'
     restart: unless-stopped
     
 networks:
